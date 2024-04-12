@@ -14,7 +14,7 @@ class BikProvider {
 
     function __construct($config) {
         $this->HEADERS = $config['headers'] ?? []; // extra headers if you want to pass it in request
-        $this->BASE_URL= $config['base_url'];
+        $this->BASE_URL = $config['base_url'];
         $this->EXTRA_CONFIG = $config['EXTRA_CONFIG'] ?? []; // Extra Guzzle/client config for api call
         $this->setupClient();
     }
@@ -25,7 +25,7 @@ class BikProvider {
             'timeout' => 2.0,
             'curl' => [
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '', 
+                CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
@@ -39,13 +39,13 @@ class BikProvider {
 
     function POST($payload) {
         try {
-            $response = $this->client->request($this->METHOD, [
+            $response = $this->client->request($this->METHOD, "", [
                 'body' => $payload,
             ]);
         } catch (RequestException $ex) {
             throw new BikException($ex->getResponse()->getBody()->getContents(), $ex->getResponse()->getStatusCode());
         }
-        if ($response->getStatusCode() != 201) {
+        if ($response->getStatusCode() != 200) {
             throw new BikException($response->getBody()->getContents(), $response->getStatusCode());
         }
         return json_decode($response->getBody()->getContents());
