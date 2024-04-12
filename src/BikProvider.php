@@ -39,7 +39,7 @@ class BikProvider {
 
     function POST($payload) {
         try {
-            $response = $this->client->request($this->METHOD,  $this->URL, [
+            $response = $this->client->request($this->METHOD, [
                 'body' => $payload,
             ]);
         } catch (RequestException $ex) {
