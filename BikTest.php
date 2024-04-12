@@ -3,7 +3,7 @@
 // use Flits\Bik\BikProvider;
 
 use Carbon\Carbon;
-use Flits\Bik\API\Upload;
+use Flits\Bik\API\InvokeFlow;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -81,7 +81,7 @@ class BikTest extends TestCase {
                 }
             ]
         }';
-        $bikTrack = new Upload($this->getHeaders());
+        $bikTrack = new InvokeFlow($this->getHeaders());
         $response=$bikTrack->POST($requestData);
         $statusCode = $response->status;
         $this->assertEquals("success", $statusCode);
